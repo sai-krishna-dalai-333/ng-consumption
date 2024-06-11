@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: consumption
+  description: 'Get consumption details based on premiseId'
+paths: 
+  /customers/consumptions/{premiseId}:
+    get:
+      summary: consumption details
+      description: Retrieve consumption details
+      tags: 
+        - Consumption
+      parameters:
+        - in: path
+          name: premiseId
+          required: true
+          schema:
+            type: string
+            format: string
+            example: 0224801EEEB5C
+      responses:
+        200:
+          description: consumption details retrieved successfully
+          content:
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/ng-consumption'
+        400:
+          description: Invalid request
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        401:
+          description: Unauthorized
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: User not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        500:
+          description: Internal Server Error
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+components:
+  schemas:
+    ng-consumption:
+      type: object
+      required:
+        - premiseId
+      properties:
+        premiseId:
+          type: string
+          example: "0224801EEEB5C"  
+        consumptionDetails:
+          type: array
+          items:
+            type: object
+            properties:
+              month:
+                type: string
+                example: Jan
+              reading:
+                type: string
+                example: 200
+              billAmount:
+                  type: string
+                  example: 300
+              carbonFootPrint:
+                    type: string
+                    example: 50
+              
+    BadRequestError:
+      type: object
+      properties:
+        errors:
+            type: array
+            items:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Invalid request
+                code:
+                  type: integer
+                  example: 400
+    UnauthorizedError:
+      type: object
+      properties:
+        errors:
+            type: array
+            items:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Unauthorized'
+                code:
+                  type: integer
+                  example: 401
+    NotFoundError:
+      type: object
+      properties:
+        errors:
+            type: array
+            items:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Not found'
+                code:
+                  type: integer
+                  example: 404
+    InternalServerError:
+      type: object
+      properties:
+        errors:
+            type: array
+            items:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Internal server error'
+                code:
+                  type: integer
+                  example: 500
+          
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - BearerAuth: []
+  
+servers:
+  - description: Consumptions API 
+    url: http://localhost:3000
