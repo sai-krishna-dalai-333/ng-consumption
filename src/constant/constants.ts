@@ -1,3 +1,6 @@
+
+//thisis a constant file consists of status code ,headers and messages.
+//use of this file. wehenever we require the constany we dont explicity write in the code we can just call the constant file 
 export enum StatusCode {
     BAD_REQUEST = 400,
     OK = 200,
