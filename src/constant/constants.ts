@@ -1,18 +1,15 @@
 
-//thisis a constant file consists of status code ,headers and messages.
-//use of this file. wehenever we require the constany we dont explicity write in the code we can just call the constant file 
-export enum StatusCode {
-    BAD_REQUEST = 400,
-    OK = 200,
-    INTERNAL_SERVER_ERROR = 500,
-}
-
+export const event = {
+    queryParameter: {
+      premiseId: "00224801EEEB5C",
+    },
+  };
+   
 export const HEADERS = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Requested-With',
-    'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PUT,DELETE',
+    'Access-Control-Allow-Methods': 'GET',
 };
-
 
 export const MESSAGES = {
     CONSUMPTION_DATA_SUCCESS: 'Consumption Data get successfully',

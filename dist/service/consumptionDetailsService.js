@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConsumptionDetailsService = void 0;
 class ConsumptionDetailsService {
-    consumptionDetailsRepository;
+    mockRepo;
     constructor(consumptionDetailsRepository) {
-        this.consumptionDetailsRepository = consumptionDetailsRepository;
+        this.mockRepo = consumptionDetailsRepository;
     }
     async getConsumptionDetailsById(premiseId) {
-        return await this.consumptionDetailsRepository.getConsumptionDetailsById(premiseId);
+        return await this.mockRepo.getConsumptionDetailsById(premiseId);
     }
 }
 exports.ConsumptionDetailsService = ConsumptionDetailsService;

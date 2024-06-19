@@ -1,50 +1,24 @@
-import { ConsumptionDetailsResponse } from "../model/iConsumptionDetailsResponse";
 
-//this method is used to convert the json object into json api format
-//parameter should be json response from the controller method.
-//here consumption is json response from the controller
-export const buildConsumptionResponse = (consumption) => {
-    //conversion into json API
+export class ResponseBuilder {
 
-    //example of json api data
-
-    // {
-    //     "data": {
-    //       "type": "users",
-    //       "id": "1",
-    //       "attributes": {
-    //         "name": "John Doe",
-    //         "email": "john.doe@example.com"
-    //       }
-    //     }
-    //   }
-      
-    const getConsumptionJsonApi = {
-        //mention jsonapi version
-        "jsonapi": {
-            "version": "1.0"
+    success(statusCode: number, data): any {
+      return {
+        statusCode: statusCode,
+        body: {
+          jsonapi: {
+            version: "1.0",
+            data,
+          },
         },
-
-        //data should contain primaryId
-        "data": {
-            "type": "consumptionDetails",
-            //attributes should contain the values inside it
-            "attributes": {
-                "premiseId": consumption.Item.premiseId,
-
-                "consumption_details": consumption.Item.consumptionDetails.map(consumptionDeatil => ({
-                    month: consumptionDeatil.month,
-                    reading: consumptionDeatil.reading,
-                    billAmount: consumptionDeatil.billAmount,
-                    carbonFootPrint: consumptionDeatil.carbonFootPrint,
-
-
-                }))
-            }
-        }
-    };
-    //return that object
-    return getConsumptionJsonApi;
-};
-
-
+      };
+    }
+ 
+    error(message: any, statusCode: number): any {
+      return {
+        statusCode: statusCode,
+        errors: {
+            message,
+        },
+      };
+    }
+  }

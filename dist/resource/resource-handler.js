@@ -1,40 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
-const consumptionDetailsRepository_1 = require("../repository/consumptionDetailsRepository");
 const consumptionDetailsService_1 = require("../service/consumptionDetailsService");
-const response_builder_1 = require("../builder/response-builder");
 const consumptionDetailsController_1 = require("../controller/consumptionDetailsController");
-const consumptionTableName = 'ngConsumption';
-const consumptionDetailsRepository = new consumptionDetailsRepository_1.ConsumptionDetailsRepository(consumptionTableName);
+const consumption_details_validator_1 = require("../validator/consumption-details-validator");
+const mock_consumptionDetails_repo_1 = require("../mockData/mock-consumptionDetails-repo");
+const constants_1 = require("../constant/constants");
+const consumptionDetailsRepository = new mock_consumptionDetails_repo_1.mockConsumptionDetailsRepository();
 const consumptionDetailsService = new consumptionDetailsService_1.ConsumptionDetailsService(consumptionDetailsRepository);
 const consumptionDetailsController = new consumptionDetailsController_1.ConsumptionDetailsController(consumptionDetailsService);
-const constants_1 = require("../constant/constants");
-const handler = async (event) => {
-    try {
-        const premiseId = event.pathParameters?.premiseId;
-        if (!premiseId || premiseId.length < 7 || premiseId.length > 7) {
-            return {
-                "statusCode": constants_1.StatusCode.BAD_REQUEST,
-                "headers": constants_1.HEADERS,
-                "body": JSON.stringify({ error: constants_1.MESSAGES.INVALID_PREMISE_ID }),
-            };
-        }
-        const getConsumption = await consumptionDetailsController.getConsumptionDetailsById(premiseId);
-        const body = (0, response_builder_1.buildConsumptionResponse)(getConsumption);
-        return {
-            "statusCode": constants_1.StatusCode.OK,
-            "headers": constants_1.HEADERS,
-            "body": JSON.stringify(body),
-        };
-    }
-    catch (error) {
-        return {
-            "statusCode": constants_1.StatusCode.INTERNAL_SERVER_ERROR,
-            "headers": constants_1.HEADERS,
-            "body": JSON.stringify({ error: constants_1.MESSAGES.FAILED_TO_GET_DATA }),
-        };
-    }
+const consumptionDetailsValidator = new consumption_details_validator_1.ConsumptionDetailsValidator();
+const handler = async (event, context, callback) => {
+    const premiseId = event.queryParameter.premiseId;
+    const response = await consumptionDetailsController.getConsumptionDetailsById(premiseId);
+    console.log(response);
+    //callback(null, response);
 };
 exports.handler = handler;
+(0, exports.handler)(constants_1.event, null, null);
 //# sourceMappingURL=resource-handler.js.map

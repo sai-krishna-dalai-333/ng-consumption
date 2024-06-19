@@ -1,0 +1,1 @@
+{"version":3,"file":"mock-consumptionDetails-repo.js","sourceRoot":"src/","sources":["mockData/mock-consumptionDetails-repo.ts"],"names":[],"mappings":";;;AACA,yCAA4C;AAC5C,MAAa,gCAAgC;IACzC,KAAK,CAAC,yBAAyB,CAAC,SAAiB;QAC7C,MAAM,MAAM,GAAG,IAAA,yBAAc,EAAC,SAAS,CAAC,CAAC;QACzC,OAAO,MAAM,CAAC;IAClB,CAAC;CACJ;AALD,4EAKC"}

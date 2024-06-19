@@ -1,19 +1,14 @@
 import { ConsumptionDetailsResponse } from "../model/iConsumptionDetailsResponse";
-import { ConsumptionDetailsRepository } from "../repository/consumptionDetailsRepository"
-import { mockConsumptionDetailsRepository } from "../mockData/mock-repo";
-
+import { mockConsumptionDetailsRepository } from "../mockData/mock-consumptionDetails-repo";
 export class ConsumptionDetailsService {
-    //creating an object for the repo class
-    private consumptionDetailsRepository: ConsumptionDetailsRepository;
+    private mockRepo :mockConsumptionDetailsRepository;
 
-    //initialize the service object
-    constructor(consumptionDetailsRepository: ConsumptionDetailsRepository) {
-        this.consumptionDetailsRepository = consumptionDetailsRepository;
+    constructor(consumptionDetailsRepository: mockConsumptionDetailsRepository) {
+        this.mockRepo = consumptionDetailsRepository;
     }
-
-   //here i have only one get method. this method uses the method which is defined in the repo class to get data.
+    
     async getConsumptionDetailsById(premiseId: string): Promise<ConsumptionDetailsResponse> {
-        return await this.consumptionDetailsRepository.getConsumptionDetailsById(premiseId);
+        return await this.mockRepo.getConsumptionDetailsById(premiseId);
     }
 
 }

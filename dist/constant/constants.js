@@ -1,16 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MESSAGES = exports.HEADERS = exports.StatusCode = void 0;
-var StatusCode;
-(function (StatusCode) {
-    StatusCode[StatusCode["BAD_REQUEST"] = 400] = "BAD_REQUEST";
-    StatusCode[StatusCode["OK"] = 200] = "OK";
-    StatusCode[StatusCode["INTERNAL_SERVER_ERROR"] = 500] = "INTERNAL_SERVER_ERROR";
-})(StatusCode || (exports.StatusCode = StatusCode = {}));
+exports.MESSAGES = exports.HEADERS = exports.event = void 0;
+exports.event = {
+    queryParameter: {
+        premiseId: "00224801EEEB5C",
+    },
+};
 exports.HEADERS = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Requested-With',
-    'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PUT,DELETE',
+    'Access-Control-Allow-Methods': 'GET',
 };
 exports.MESSAGES = {
     CONSUMPTION_DATA_SUCCESS: 'Consumption Data get successfully',

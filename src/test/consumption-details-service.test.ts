@@ -2,7 +2,7 @@
 
 // consumptionDetailsService.test.ts
 import { ConsumptionDetailsService } from '../service/consumptionDetailsService';
-import { mockConsumptionDetailsRepository } from '../mockData/mock-repo';
+import { mockConsumptionDetailsRepository } from '../mockData/mock-consumptionDetails-repo';
 
 describe('ConsumptionDetailsService', () => {
   let service: ConsumptionDetailsService;

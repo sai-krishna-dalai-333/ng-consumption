@@ -1,28 +1,28 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConsumptionDetailsRepository = void 0;
-const client_dynamodb_1 = require("@aws-sdk/client-dynamodb");
-const lib_dynamodb_1 = require("@aws-sdk/lib-dynamodb");
-class ConsumptionDetailsRepository {
-    client;
-    docClient;
-    tableName;
-    constructor(tableName) {
-        this.client = new client_dynamodb_1.DynamoDBClient({ region: "us-east-1" });
-        this.docClient = lib_dynamodb_1.DynamoDBDocumentClient.from(this.client);
-        this.tableName = tableName;
-    }
-    async getConsumptionDetailsById(customerId) {
-        const command = new lib_dynamodb_1.GetCommand({
-            TableName: this.tableName,
-            Key: {
-                customerId: customerId
-            }
-        });
-        const response = await this.docClient.send(command);
-        console.log(response);
-        return response;
-    }
-}
-exports.ConsumptionDetailsRepository = ConsumptionDetailsRepository;
+// import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+// import { GetCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+// import { ConsumptionDetailsResponse } from "../model/iConsumptionDetailsResponse";
+// export class ConsumptionDetailsRepository {
+//     private client: DynamoDBClient;    //fetches data from the fdynamodb. high level abstraction. Data type should be considered
+//     private docClient: DynamoDBDocumentClient; // fetches data from dynamodb . low lwvwl abstraction. we dont require to specify datatype
+//     private tableName: string;
+//     //intialize the dynamodbclient,docClient
+//     constructor(tableName: string) {
+//         this.client = new DynamoDBClient({ region: "us-east-1" });
+//         this.docClient = DynamoDBDocumentClient.from(this.client);
+//         this.tableName = tableName;
+//     }
+//     //it is a command used to fetch the dynamodb using primary key
+//     async getConsumptionDetailsById(premiseId: string): Promise<ConsumptionDetailsResponse> {
+//         const command = new GetCommand({
+//             TableName: this.tableName,
+//             Key: {
+//                 premiseId: premiseId
+//             }
+//         });
+//         //response from dynamodb will be stored in response variable and return that response
+//         const response: any = await this.docClient.send(command);
+//         console.log(response);
+//         return response;
+//     }
+// }
 //# sourceMappingURL=consumptionDetailsRepository.js.map
